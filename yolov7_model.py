@@ -27,7 +27,7 @@ class YoloV7():
         for i in range(len(preds)):
             pred = preds[i:i+1, :, :]
             pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=False)[0]
-            pred[:, :4] = scale_coords(img.shape[-2:], pred[:, :4], [1080, 1920]).round()
+            pred[:, :4] = scale_coords(img.shape[-2:], pred[:, :4], [540, 960]).round()
             results.append(pred)
         return results
 

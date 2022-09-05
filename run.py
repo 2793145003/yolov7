@@ -31,13 +31,13 @@ def main():
     parser.add_argument('--width', help='width', default=960)
     parser.add_argument('--height', help='height', default=540)
     parser.add_argument('--input_path', help='input path', default='/input/VID_20220727_175808.mp4')
-    parser.add_argument('--output_path', help='output path', default='/input/')
+    parser.add_argument('--output_path', help='output path', default='/input')
     parser.add_argument('--counter_path', help='counter json path, in range [0-1]', default='/input/counter.json')
     parser.add_argument('--batch_size', help='detector batch size', default=32)
     args = parser.parse_args()
 
-    with open("/input/progress.txt", "w") as f:
-        f.write("0")
+    with open(f"{args.output_path}/progress.txt", "w") as f:
+        f.write("0\n")
 
     config = 'configs/yolov7.py'
     input_path = args.input_path
@@ -53,8 +53,8 @@ def main():
     checkpoint = None
 
     input_path = change_video(input_path, "changed_video.mp4", fps, size)
-    with open("/input/progress.txt", "a") as f:
-        f.write("10")
+    with open(f"{args.output_path}/progress.txt", "a") as f:
+        f.write("10\n")
 
     cnt = None
     try:
@@ -121,8 +121,8 @@ def main():
         if len(batch) < batch_size:
             continue
 
-        with open("/input/progress.txt", "a") as f:
-            f.write(f"{10+int(frame_id/len(imgs))*80}")
+        with open(f"{args.output_path}/progress.txt", "a") as f:
+            f.write(f"{10+int(frame_id/len(imgs))*80}\n")
 
         data = collate(batch, samples_per_gpu=batch_size)
         data = scatter(data, [device])[0]
@@ -197,15 +197,15 @@ def main():
         if all_ids[key] > fps: # 只计算这些帧以上的
             count += 1
             # print(key)
-    with open("/input/count.txt", "a") as f:
+    with open(f"{args.output_path}/count.txt", "w") as f:
         f.write(f"{count}")
     
-    with open("/input/progress.txt", "a") as f:
-        f.write(f"{90}")
+    with open(f"{args.output_path}/progress.txt", "a") as f:
+        f.write(f"{90}\n")
 
     mmcv.frames2video(out_path, f'{args.output_path}/result.mp4', fps=fps, fourcc='mp4v')
     out_dir.cleanup()
-    with open("/input/progress.txt", "a") as f:
+    with open(f"{args.output_path}/progress.txt", "a") as f:
         f.write(f"{100}")
 
 
