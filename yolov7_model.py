@@ -1,5 +1,3 @@
-
-
 from models.experimental import attempt_load
 from utils.general import non_max_suppression, clip_coords
 from utils.torch_utils import select_device

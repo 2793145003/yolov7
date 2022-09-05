@@ -1,6 +1,7 @@
 FROM uhub.service.ucloud.cn/openbayes_algopub/pytorch-tvm:1.11.0-tvm0.9.0-cu113.81
-pip install mmtrack
+RUN pip install mmtrack
+RUN pip install seaborn thop
 COPY ./* /home/
-cd /home/ && pip install -r requirements.txt
+RUN cd /home/ && pip install -r requirements.txt
 
-# sudo nvidia-docker run --rm --name tracking -v /home/jianghan/tracking/test_input:/input python run.py --input_path /input/VID_20220727_175808.mp4 --counter_path /input/counter.json
+# sudo nvidia-docker run --rm --name tracking -v /home/jianghan/tracking/test_input:/input tracking python /home/run.py --input_path /input/VID_20220727_175808.mp4 --counter_path /input/counter.json
