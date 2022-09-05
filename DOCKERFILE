@@ -1,0 +1,4 @@
+FROM uhub.service.ucloud.cn/openbayes_algopub/pytorch-tvm:1.11.0-tvm0.9.0-cu113.81
+pip install mmtrack
+COPY ./* /home/
+cd /home/ && pip install -r requirements.txt
