@@ -59,8 +59,9 @@ def main():
     imgs = mmcv.VideoReader(input_path)
     IN_VIDEO = True
     OUT_VIDEO = True
-    out_dir = 'results/tmp/'#tempfile.TemporaryDirectory()
-    out_path = out_dir#.name
+    # out_dir = 'results/tmp/'
+    out_dir = tempfile.TemporaryDirectory()
+    out_path = out_dir.name
     _out = 'test.mp4'.rsplit(os.sep, 1)
     if len(_out) > 1:
         os.makedirs(_out[0], exist_ok=True)
