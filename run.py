@@ -122,7 +122,7 @@ def main():
             continue
 
         with open(f"{args.output_path}/progress.txt", "a") as f:
-            f.write(f"{10+int(frame_id/len(imgs))*80}\n")
+            f.write(f"{10+int(frame_id/len(imgs)*80)}\n")
 
         data = collate(batch, samples_per_gpu=batch_size)
         data = scatter(data, [device])[0]
