@@ -31,6 +31,7 @@ def main():
     parser.add_argument('--width', help='width', default=960)
     parser.add_argument('--height', help='height', default=540)
     parser.add_argument('--input_path', help='input path', default='/input/VID_20220727_175808.mp4')
+    parser.add_argument('--output_path', help='output path', default='/input/')
     parser.add_argument('--counter_path', help='counter json path, in range [0-1]', default='/input/counter.json')
     parser.add_argument('--batch_size', help='detector batch size', default=32)
     args = parser.parse_args()
@@ -202,7 +203,7 @@ def main():
     with open("progress.txt", "a") as f:
         f.write(f"{90}")
 
-    mmcv.frames2video(out_path, f'results/{args.input_name}_{size[0]:04d}x{size[1]:04d}_fps{fps:02d}_{count}.mp4', fps=fps, fourcc='mp4v')
+    mmcv.frames2video(out_path, f'{args.output_path}/result.mp4', fps=fps, fourcc='mp4v')
     out_dir.cleanup()
     with open("progress.txt", "a") as f:
         f.write(f"{100}")
