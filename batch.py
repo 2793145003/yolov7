@@ -80,7 +80,7 @@ def main():
     # test and show/save the images
     all_ids = dict()
     id_count = []
-
+    result_frame_id = 0
     for frame_id, img in enumerate(imgs):
         prog_bar.update()
         if frame_id % batch_size == 0:
@@ -119,7 +119,7 @@ def main():
         # ------------------------------------
 
         for result in results:
-            out_file = osp.join(out_path, f'{frame_id:06d}.jpg')
+            out_file = osp.join(out_path, f'{result_frame_id:06d}.jpg')
 
             ## 2.提取结果并计数
             track_bboxes = result.get('track_bboxes', None)
@@ -174,6 +174,7 @@ def main():
                 out_file=out_file,
                 backend=backend)
             cv2.imwrite(out_file, img)
+            result_frame_id += 1
         # break
 
     ## 3.输出结果
