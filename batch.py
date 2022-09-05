@@ -27,9 +27,9 @@ def change_video(input_path, output_name, ori_fps, fps, size):
 def main():
     parser = ArgumentParser()
     parser.add_argument('--fps', help='fps', default=15)
-    parser.add_argument('--size_frac', help='1/size_frac', default=32)
+    parser.add_argument('--size_frac', help='1/size_frac', default=1)
     parser.add_argument('--input_name', help='name without .mp4', default='VID_20220727_175808')
-    parser.add_argument('--batch_size', help='detector batch size', default=1)
+    parser.add_argument('--batch_size', help='detector batch size', default=32)
     args = parser.parse_args()
 
     config = 'configs/yolov7.py'
