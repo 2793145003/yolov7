@@ -167,7 +167,7 @@ def main():
 
             img = cv2.putText(img, f"count: {len(id_count)}", (0, 100), cv2.FONT_HERSHEY_SIMPLEX, 
                             0.5, (0, 0, 255), 2)
-            # img = cv2.drawContours(img, [cnt], -1, (0,255,0), 2)
+            img = cv2.drawContours(img, [cnt], -1, (0,255,0), 2)
             img = cv2.putText(img, f"{0}", (0, 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
             model.show_result(
