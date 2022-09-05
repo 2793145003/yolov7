@@ -83,10 +83,12 @@ def main():
     all_ids = dict()
     id_count = []
     result_frame_id = 0
+    batch_img = []
     for frame_id, img in enumerate(imgs):
         prog_bar.update()
         if frame_id % batch_size == 0:
             batch = []
+            batch_img = []
 
         if isinstance(img, str):
             img = osp.join(input_path, img)
@@ -109,6 +111,7 @@ def main():
         test_pipeline = Compose(cfg.data.test.pipeline)
         data = test_pipeline(data)
         batch.append(data)
+        batch_img.append(img)
         if len(batch) < batch_size:
             continue
 
@@ -123,7 +126,7 @@ def main():
             results = model(return_loss=False, rescale=True, **data)
         # ------------------------------------
 
-        for result in results:
+        for result, img in zip(results, batch_img):
             out_file = osp.join(out_path, f'{result_frame_id:06d}.jpg')
 
             ## 2.提取结果并计数
