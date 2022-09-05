@@ -36,7 +36,7 @@ def main():
     parser.add_argument('--batch_size', help='detector batch size', default=32)
     args = parser.parse_args()
 
-    with open("progress.txt", "w") as f:
+    with open("/input/progress.txt", "w") as f:
         f.write("0")
 
     config = 'configs/yolov7.py'
@@ -53,7 +53,7 @@ def main():
     checkpoint = None
 
     input_path = change_video(input_path, "changed_video.mp4", fps, size)
-    with open("progress.txt", "a") as f:
+    with open("/input/progress.txt", "a") as f:
         f.write("10")
 
     cnt = None
@@ -121,7 +121,7 @@ def main():
         if len(batch) < batch_size:
             continue
 
-        with open("progress.txt", "a") as f:
+        with open("/input/progress.txt", "a") as f:
             f.write(f"{10+int(frame_id/len(imgs))*80}")
 
         data = collate(batch, samples_per_gpu=batch_size)
@@ -197,15 +197,15 @@ def main():
         if all_ids[key] > fps: # 只计算这些帧以上的
             count += 1
             # print(key)
-    with open("count.txt", "a") as f:
+    with open("/input/count.txt", "a") as f:
         f.write(f"{count}")
     
-    with open("progress.txt", "a") as f:
+    with open("/input/progress.txt", "a") as f:
         f.write(f"{90}")
 
     mmcv.frames2video(out_path, f'{args.output_path}/result.mp4', fps=fps, fourcc='mp4v')
     out_dir.cleanup()
-    with open("progress.txt", "a") as f:
+    with open("/input/progress.txt", "a") as f:
         f.write(f"{100}")
 
 
