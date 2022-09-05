@@ -75,15 +75,6 @@ def main():
     _out = 'test.mp4'.rsplit(os.sep, 1)
     if len(_out) > 1:
         os.makedirs(_out[0], exist_ok=True)
-
-    fps = fps
-    if show or OUT_VIDEO:
-        if fps is None and IN_VIDEO:
-            fps = imgs.fps
-        if not fps:
-            raise ValueError('Please set the FPS for the output video.')
-        fps = int(fps)
-
     # build the model from a config file and a checkpoint file
     model = init_model(config, checkpoint, device=device)
 
