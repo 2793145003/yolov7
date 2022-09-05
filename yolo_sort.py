@@ -119,8 +119,8 @@ class YOLOSORT(BaseMultiObjectTracker):
         #     print(f'\n-> detector_min: {min(self.time["detector"])}, detector_max: {max(self.time["detector"])}, detector_mean: {statistics.mean(self.time["detector"])}')
         #     print(f'-> tracker_min: {min(self.time["tracker"])}, tracker_max: {max(self.time["tracker"])}, tracker_mean: {statistics.mean(self.time["tracker"])}')
 
-        results.append(dict(
-            det_bboxes=det_results['bbox_results'],
-            track_bboxes=track_results['bbox_results']))
+            results.append(dict(
+                det_bboxes=det_results['bbox_results'],
+                track_bboxes=track_results['bbox_results']))
         return results
 
